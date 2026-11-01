@@ -69,24 +69,26 @@ ORQUESTACIÓN                                    COREOGRAFÍA
 
 ```text
 src/main/java/com/juniverse/saga/
-├── domain/                     # la lógica de negocio, igual para ambos enfoques
+├── controller/                 # API de pedidos y herramientas de demostración
+├── service/                    # la lógica de negocio, igual para ambos enfoques
 │   ├── PaymentService          # cobrar / reembolsar (idempotentes, con lápida)
 │   ├── InventoryService        # reservar / liberar
 │   ├── ShippingService         # programar envío
 │   ├── OrderService            # estado del pedido
-│   └── SagaLog                 # bitácora de todo lo que ocurre
-├── choreography/               # 4 participantes que reaccionan a eventos
-│   ├── ChoreographyStarter, PaymentChoreography, InventoryChoreography,
-│   └── ShippingChoreography, OrderChoreography
-├── orchestration/
-│   ├── OrderSagaOrchestrator   # la máquina de estados (RUNNING → COMPLETED | COMPENSATING → COMPENSATED)
-│   ├── SagaStep                # definición declarativa de cada paso y su compensación
-│   ├── SagaRepository          # estado persistido (con bloqueo de fila)
-│   ├── OrchestratorListeners   # respuestas de Kafka y vigilante de tiempos
-│   └── PaymentParticipant, InventoryParticipant, ShippingParticipant   # ejecutan comandos y responden
-├── messaging/                  # MessageBus, SagaMessage (evento/comando), SagaReply
-├── config/                     # temas de Kafka, manejo de errores y cartas muertas
-└── web/                        # API de pedidos y herramientas de demostración
+│   ├── choreography/           # 4 participantes que reaccionan a eventos
+│   │   ├── ChoreographyStarter, PaymentChoreography, InventoryChoreography,
+│   │   └── ShippingChoreography, OrderChoreography
+│   └── orchestration/
+│       ├── OrderSagaOrchestrator   # la máquina de estados (RUNNING → COMPLETED | COMPENSATING → COMPENSATED)
+│       ├── SagaStep                # definición declarativa de cada paso y su compensación
+│       ├── OrchestratorListeners   # respuestas de Kafka y vigilante de tiempos
+│       └── PaymentParticipant, InventoryParticipant, ShippingParticipant   # ejecutan comandos y responden
+├── repository/                 # SagaRepository: estado persistido (con bloqueo de fila)
+├── model/                      # SagaLog (bitácora), Outcome, DemoData
+├── messaging/                  # MessageBus
+├── dto/                        # SagaMessage (evento/comando), SagaReply
+├── exception/                  # ApiExceptionHandler
+└── config/                     # temas de Kafka, manejo de errores y cartas muertas, datos de demostración
 ```
 
 Los participantes de ambos enfoques usan **los mismos servicios de dominio**: lo único que cambia es quién decide qué viene después.

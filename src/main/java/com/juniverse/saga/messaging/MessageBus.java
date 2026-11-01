@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import tools.jackson.databind.json.JsonMapper;
+import com.juniverse.saga.dto.SagaMessage;
+import com.juniverse.saga.dto.SagaReply;
 
 /** Envío y lectura de mensajes JSON. Centraliza la serialización para que ningún servicio toque Kafka directamente. */
 @Component

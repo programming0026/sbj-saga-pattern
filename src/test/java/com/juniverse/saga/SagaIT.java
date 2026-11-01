@@ -9,11 +9,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.jayway.jsonpath.JsonPath;
 import com.juniverse.saga.config.Topics;
-import com.juniverse.saga.domain.DemoData;
-import com.juniverse.saga.domain.SagaLog;
+import com.juniverse.saga.model.DemoData;
+import com.juniverse.saga.model.SagaLog;
 import com.juniverse.saga.messaging.MessageBus;
-import com.juniverse.saga.messaging.SagaMessage;
-import com.juniverse.saga.messaging.SagaReply;
+import com.juniverse.saga.dto.SagaMessage;
+import com.juniverse.saga.dto.SagaReply;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.ArrayList;
