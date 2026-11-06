@@ -1,13 +1,13 @@
 package com.juniverse.saga.controller;
 
+import com.juniverse.saga.dto.OrderRequest;
+import com.juniverse.saga.dto.OrderView;
 import com.juniverse.saga.service.choreography.ChoreographyStarter;
 import com.juniverse.saga.service.OrderService;
 import com.juniverse.saga.model.SagaLog;
 import com.juniverse.saga.service.orchestration.OrchestrationStarter;
 import com.juniverse.saga.repository.SagaRepository;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
@@ -23,28 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class OrderController {
-
-    /**
-     * Datos de un pedido.
-     *
-     * @param customer cliente (ana, eva, luis, rich)
-     * @param sku producto (LAPTOP, MOUSE, SCARCE)
-     * @param quantity cantidad
-     * @param address dirección de envío; si empieza por INVALID, el envío falla
-     */
-    public record OrderRequest(@NotBlank(message = "El cliente es obligatorio") String customer, @NotBlank(message = "El producto es obligatorio") String sku,
-            @Min(value = 1, message = "La cantidad mínima es 1") int quantity, String address) {
-    }
-
-    /**
-     * Pedido con su bitácora.
-     *
-     * @param order datos del pedido
-     * @param sagaState estado del orquestador (solo en orquestación)
-     * @param log bitácora de la saga
-     */
-    public record OrderView(OrderService.Order order, String sagaState, List<SagaLog.Entry> log) {
-    }
 
     private final OrchestrationStarter orchestration;
     private final ChoreographyStarter choreography;

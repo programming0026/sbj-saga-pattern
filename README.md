@@ -86,7 +86,7 @@ src/main/java/com/juniverse/saga/
 ├── repository/                 # SagaRepository: estado persistido (con bloqueo de fila)
 ├── model/                      # SagaLog (bitácora), Outcome, DemoData
 ├── messaging/                  # MessageBus
-├── dto/                        # SagaMessage (evento/comando), SagaReply
+├── dto/                        # SagaMessage (evento/comando), SagaReply, OrderRequest, OrderView
 ├── exception/                  # ApiExceptionHandler
 └── config/                     # temas de Kafka, manejo de errores y cartas muertas, datos de demostración
 ```
